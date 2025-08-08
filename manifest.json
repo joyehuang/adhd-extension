@@ -1,0 +1,47 @@
+{
+  "manifest_version": 3,
+  "name": "ADHD 学习辅助插件（Bilibili）",
+  "version": "0.1.0",
+  "description": "学习模式：去干扰（隐藏推荐/广告等）、悬浮番茄钟（后续）、学习档案（后续）。",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "alarms",
+    "notifications"
+  ],
+  "host_permissions": [
+    "https://*.bilibili.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "学习模式开关",
+    "default_popup": "popup.html"
+  },
+  "commands": {
+    "toggle-learning-mode": {
+      "suggested_key": {
+        "default": "Alt+Shift+F"
+      },
+      "description": "切换学习模式"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.bilibili.com/*"
+      ],
+      "js": ["content.js"],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["remove_div.txt"],
+      "matches": ["https://*.bilibili.com/*"]
+    }
+  ]
+}
+
+
